@@ -24,7 +24,7 @@ jobs:
 
       - name: Deploy Code to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@54.169.93.230 "cd /home/ubuntu/github-action-pipeline  && ./deploy.sh"
+          ssh ubuntu@54.169.93.230 "cd /home/ubuntu/github-action-pipeline  && ./deploy.sh"
 
 
 
