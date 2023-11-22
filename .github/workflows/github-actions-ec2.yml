@@ -37,7 +37,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Executing remote ssh commands using ssh key
+      - name: Deploying code on server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_DNS }}
