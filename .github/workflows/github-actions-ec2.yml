@@ -26,5 +26,6 @@ jobs:
         run: |
           ssh ubuntu@54.169.93.230 "cd /home/ubuntu/github-action-pipeline  && ./deploy.sh"
 
+          
 
 
