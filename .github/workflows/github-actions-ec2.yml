@@ -30,37 +30,19 @@
 #           ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ubuntu@54.169.93.230 "cd /home/ubuntu/github-action-pipeline && ./deploy.sh"
 
 
-name: Push-to-EC2
-
-on:
-  push:
-    branches:
-      - main
-
+name: Remote ssh command
+on: [push]
 jobs:
-  deploy:
-    name: Deploy to EC2 on main branch push
+  build:
+    name: Build
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout the files
-        uses: actions/checkout@v2
-
-      - name: Deploy to Server 1
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          TARGET: ${{ secrets.TARGET_DIR }}
-
-      - name: Print Base64 Encoded SSH Key (for debugging)
-        run: echo "$SSH_PRIVATE_KEY" | base64
-        id: print_ssh_key
-
-      - name: Deploy Code to EC2
-        run: |
-          decoded_ssh_key=$(echo "${{ steps.print_ssh_key.outputs.stdout }}" | base64 --decode)
-          echo "Decoded SSH Key:"
-          echo "$decoded_ssh_key"
-          ssh -o StrictHostKeyChecking=no -i <(echo "$decoded_ssh_key") ubuntu@54.169.93.230 "cd /home/ubuntu/github-action-pipeline && ./deploy.sh"
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/github-action-pipeline
+            touch file3
