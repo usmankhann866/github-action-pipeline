@@ -19,6 +19,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_USER: ${{ secrets.USERNAME }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
 
       - name: Deploy Code to EC2
         run: |
