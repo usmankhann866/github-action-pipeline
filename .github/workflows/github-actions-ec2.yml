@@ -26,3 +26,5 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ubuntu@54.169.93.230 "cd /home/ubuntu/github-action-pipeline  && ./deploy.sh"
 
+
+
