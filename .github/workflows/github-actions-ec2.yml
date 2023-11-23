@@ -1,37 +1,5 @@
-# name: Push-to-EC2
-
-# on:
-#   push:
-#     branches:
-#       - main
-
-# jobs:
-#   deploy:
-#     name: Deploy to EC2 on main branch push
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout the files
-#         uses: actions/checkout@v2
-
-#       - name: Deploy to Server 1
-#         uses: easingthemes/ssh-deploy@main
-#         env:
-#           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-#           REMOTE_USER: ${{ secrets.USERNAME }}
-#           REMOTE_HOST: ${{ secrets.HOST_DNS }}
-#           TARGET: ${{ secrets.TARGET_DIR }}
-
-#       - name: Print SSH Key (for debugging)
-#         run: echo "$SSH_PRIVATE_KEY"
-
-#       - name: Deploy Code to EC2
-#         run: |
-#           ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ubuntu@54.169.93.230 "cd /home/ubuntu/github-action-pipeline && ./deploy.sh"
-
-
-name: Remote ssh command
-# on: [push]
+name: Remote ssh command to deploy code
+# on: [push] // when you want to run pipeline on push to any branch.
 on:
      push:
        branches:
@@ -50,10 +18,3 @@ jobs:
           script: |
             cd /home/ubuntu/github-action-pipeline
             sh devCdScript.sh
-
-
-# When you want to run the githb action on a specific branch.
-# on:
-#   push:
-#     branches:
-#       - main
