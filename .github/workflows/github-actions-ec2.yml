@@ -40,9 +40,16 @@ jobs:
       - name: Deploying code on server
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST_DNS }}
+          host: ${{ secrets.HOST_IP }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /home/ubuntu/github-action-pipeline
             sh devCdScript.sh
+
+
+# When you want to run the githb action on a specific branch.
+# on:
+#   push:
+#     branches:
+#       - main
