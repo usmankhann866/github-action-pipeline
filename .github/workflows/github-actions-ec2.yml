@@ -18,7 +18,5 @@ jobs:
           script: |
             cd /home/ubuntu/dca_backend
             sh devCdScript.sh
-          # npm install -g pm2
-          # pm2 start echosystem.config.json
-
-
+         
+            
