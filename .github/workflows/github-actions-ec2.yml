@@ -17,5 +17,6 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /home/ubuntu/dca_backend
-            npm install -g pm2
-            pm2 start echosystem.config.json
+            sh devCdScript.sh
+          # npm install -g pm2
+            # pm2 start echosystem.config.json
